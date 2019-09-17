@@ -8,4 +8,7 @@ TH_NO_SSE=1  # disable SSE codepaths
 
 ppc64le options:
 TH_NO_VSX=1  # disable VSX codepaths
+
+s390x options:
+TH_NO_VX=1  # disable VX codepaths
 ```
