@@ -10,6 +10,12 @@
 #include <TH/vector/VSX.cpp>
 #endif
 
+// GJ19
+#ifdef __s390x__
+#warning s390 detected
+#include <TH/vector/VX.cpp>
+#endif
+
 #if defined(USE_AVX)
 #include <TH/vector/AVX.h>
 #endif
