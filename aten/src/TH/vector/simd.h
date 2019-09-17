@@ -45,6 +45,9 @@ enum SIMDExtensions
   SIMDExtension_NEON    = 0x1,
 #elif defined(__PPC64__)
   SIMDExtension_VSX     = 0x1,
+  // GJ19
+#elif defined(__s390x__)
+  //SIMDExtension_VX = 0x1;
 #else
   SIMDExtension_AVX2    = 0x1,
   SIMDExtension_AVX     = 0x2,
@@ -72,13 +75,6 @@ static inline uint32_t detectHostSIMDExtensions()
 
  #endif
 
-#elif defined(__s390x__)
-
-static inline uint32_t detectHostSIMDExtensions()
-{
-  return SIMDExtension_DEFAULT;
-}
-
 #elif defined(__PPC64__)
 
  #if defined(__VSX__)
@@ -102,7 +98,33 @@ static inline uint32_t detectHostSIMDExtensions()
 }
 
  #endif
- 
+
+// GJ19
+#elif defined(__s390x__)
+
+ #if defined(__VX__)
+   // Allow disable via TH_NO_VX
+static inline uint32_t detectHostSIMDExtensions()
+{
+  uint32_t hostSimdExts = SIMDExtension_DEFAULT;
+  char *evar;
+
+  evar = getenv("TH_NO_VX");
+  //GJ19: UNDER CONSTRUCTION
+  //if (evar == NULL || strncmp(evar, "1", 1) != 0)
+  //hostSimdExts = SIMDExtension_VX;
+  return hostSimdExts;
+}
+
+ #else //s390x/Z without VX
+
+static inline uint32_t detectHostSIMDExtensions()
+{
+  return SIMDExtension_DEFAULT;
+}
+
+ #endif
+
 #elif defined(__EMSCRIPTEN__)
 
 static inline uint32_t detectHostSIMDExtensions()
