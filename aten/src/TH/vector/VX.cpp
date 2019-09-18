@@ -1,5 +1,16 @@
 /* Copyright (c) 2019 IBM Corp. - Geert Janssen <geert@us.ibm.com> */
 
+/* Summary of available vectorized operations:
+   for both float and double elements:
+   fill: x=c
+   cadd: z=x+c*y
+   adds: y=c+x
+   cmul: z=x*y
+   muls: y=c*x
+   cdiv: z=x/y
+   divs: y=x/c
+*/
+
 #ifdef __VX__
 #include <vecintrin.h>
 #undef vector
