@@ -26,6 +26,12 @@ static FunctionDescription THVector_(fill_DISPATCHTABLE)[] = {
     #endif
   #endif
 
+  #if defined(__VX__)
+    #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
+      FUNCTION_IMPL(THVector_(fill_VX), SIMDExtension_VX),
+    #endif
+  #endif
+
   #if defined(USE_AVX)
     #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
       FUNCTION_IMPL(THVector_(fill_AVX), SIMDExtension_AVX),
@@ -80,6 +86,12 @@ static FunctionDescription THVector_(adds_DISPATCHTABLE)[] = {
     #endif
   #endif
 
+  #if defined(__VX__)
+    #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
+      FUNCTION_IMPL(THVector_(adds_VX), SIMDExtension_VX),
+    #endif
+  #endif
+
   #if defined(USE_AVX)
     #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
       FUNCTION_IMPL(THVector_(adds_AVX), SIMDExtension_AVX),
@@ -124,6 +136,12 @@ static FunctionDescription THVector_(muls_DISPATCHTABLE)[] = {
   #if defined(__PPC64__)
     #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
       FUNCTION_IMPL(THVector_(muls_VSX), SIMDExtension_VSX),
+    #endif
+  #endif
+
+  #if defined(__VX__)
+    #if defined(TH_REAL_IS_DOUBLE) || defined(TH_REAL_IS_FLOAT)
+      FUNCTION_IMPL(THVector_(muls_VX), SIMDExtension_VX),
     #endif
   #endif
 
